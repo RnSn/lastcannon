@@ -8,6 +8,8 @@ public class Cannon {
     private final Texture txt;
     private float x;
     private float y;
+    private boolean leftMotion;
+    private boolean rightMotion;
 
     public Cannon(Texture txt) {
         this.txt = txt;
@@ -19,15 +21,30 @@ public class Cannon {
         return txt;
     }
 
+    private void updateX() {
+        if (leftMotion) {
+            x -= 30 * Gdx.graphics.getDeltaTime();
+        } else if (rightMotion) {
+            x += 30 * Gdx.graphics.getDeltaTime();
+        }
+    }
+
     public void right() {
-        x += 5;
+        rightMotion = true;
+        leftMotion = false;
     }
 
     public void left() {
-        x -= 5;
+        rightMotion = false;
+        leftMotion = true;
+    }
+
+    public void stopHorizontal() {
+        rightMotion = leftMotion = false;
     }
 
     public float x() {
+        updateX();
         return x;
     }
 

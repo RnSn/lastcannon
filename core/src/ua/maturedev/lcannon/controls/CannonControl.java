@@ -23,4 +23,13 @@ public class CannonControl extends InputAdapter {
         }
         return false;
     }
+
+    @Override
+    public boolean keyUp(final int keycode) {
+        if (keycode == Input.Keys.LEFT || keycode == Input.Keys.RIGHT) {
+            cannon.stopHorizontal();
+            return true;
+        }
+        return false;
+    }
 }
